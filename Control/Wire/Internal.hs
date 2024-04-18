@@ -39,13 +39,14 @@ data Event a
     | Now a   -- ^ In this frame with the given value.
     deriving (Functor)
 
-instance Align Event where
-    nil = NotNow
-
+instance Semialign Event where
     alignWith f (Now x) (Now y) = Now (f (These x y))
     alignWith f (Now x) _       = Now (f (This x))
     alignWith f _       (Now y) = Now (f (That y))
     alignWith _ _       _       = NotNow
+
+instance Align Event where
+    nil = NotNow
 
 instance Alt Event where
     (<!>) = alignWith (mergeThese const)

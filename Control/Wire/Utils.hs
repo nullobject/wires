@@ -25,6 +25,7 @@ import Control.Wire.Internal
 import Data.Align
 import Data.Profunctor
 import Data.These
+import Data.These.Combinators
 import Prelude hiding ((.), id)
 
 

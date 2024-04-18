@@ -49,7 +49,7 @@ myApp = proc _ -> do
 
     animate -< liftIO $ do
         performGC
-        mem <- (`div` 1024) . currentBytesUsed <$> getGCStats
+        mem <- (`div` 1024) . gcdetails_mem_in_use_bytes . gc <$> getRTSStats
         printf "\r%8dk %8.2f %5.2f %s %s\027[K"
             mem
             fps
